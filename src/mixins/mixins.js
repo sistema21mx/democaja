@@ -14,11 +14,82 @@ export default {
     methods: {
       //
       getFocus: async function (val) {
-        await new Promise(resolve => setTimeout(resolve, 500)) // Pausa
+        await new Promise(resolve => setTimeout(resolve, 500)) // Pause
         await document.getElementById(val).focus()
       },
+      async closeApp () { // param
+        await this.$store.dispatch('loadLoggedIn', 0);
+        await this.setToken('');
+        await this.loadRoute('Login', {});
+
+
+        /* 
+        if(await param === 'Logout'){
+          await this.createLogUser(
+            await this.userData.email, param + ' ' + await this.userData.email
+          );
+        }
+        //
+        if(await param === 'CancelLogin'){
+          await this.createLogUser(
+            await 'user', param + ' ' + await this.formData.email
+          );
+        }
+        //
+        await this.$store.dispatch('loadLoggedIn', 0);
+        await this.$store.dispatch('loadToken', '');
+        await this.$store.dispatch('loadUserData', this.userDataDefault);
+        this.responseData = await [];
+        await sessionStorage.removeItem('localToken');
+        await this.loadRoute('Login', {});
+        */
+      },
+      async loadRoute (route, param) {
+        if(await this.$route.name !== route){
+          await this.$router.push({ name: route, params: param });
+        }
+      },
+      async getOverlay (val){
+        await this.$store.dispatch('loadOverlay', 1);
+        await new Promise(resolve => setTimeout(resolve, val));
+        await this.$store.dispatch('loadOverlay', 0);
+      },
+      async displayMsg (msgtxt, msgtype){
+        await this.$store.dispatch('loadMessage', {msg: msgtxt, type: msgtype});
+      },
+      async setToken (val){
+        //
+        if(await val === ''){
+          await sessionStorage.removeItem('localToken');
+        } else {
+          await this.$store.dispatch('loadToken', val);
+          await sessionStorage.setItem('localToken', JSON.stringify(val));
+        }
+      },
       //
-      async getToken (formData) { // formData
+      //
+      //
+      async closeAppOLD (param) {
+        if(await param === 'Logout'){
+          await this.createLogUser(
+            await this.userData.email, param + ' ' + await this.userData.email
+          );
+        }
+        /*
+        if(await param === 'CancelLogin'){
+          await this.createLogUser(
+            await 'user', param + ' ' + await this.formData.email
+          );
+        }
+        */
+        await this.$store.dispatch('loadLoggedIn', 0);
+        await this.$store.dispatch('loadToken', '');
+        await this.$store.dispatch('loadUserData', this.userDataDefault);
+        this.responseData = await [];
+        await sessionStorage.removeItem('localToken');
+        await this.loadRoute('Login', {});
+      },
+      async getTokenOLD (formData) { // formData
         let apiRoute = await 'login';
         let Token = await '';
         await this.$store.dispatch('loadToken', '');
@@ -50,7 +121,7 @@ export default {
         }
       },
       //
-      async getTokenInfo () {
+      async getTokenInfoOLD () {
         await this.$store.dispatch('loadUserData', this.userDataDefault);
         if(await this.token === '' && await sessionStorage.getItem('localToken') ){
             try {
@@ -84,7 +155,7 @@ export default {
         }
       },
       //
-      async getMenuItemList () {
+      async getMenuItemListOLD () {
         if(await this.token !== '' && await sessionStorage.getItem('localToken') ){
           /*
           let apiRoute = await 'profile/' + this.userData.id; // 'menugetactive'
@@ -99,34 +170,7 @@ export default {
         }
       },
       //
-      async closeApp (param) {
-        if(await param === 'Logout'){
-          await this.createLogUser(
-            await this.userData.email, param + ' ' + await this.userData.email
-          );
-        }
-        /*
-        if(await param === 'CancelLogin'){
-          await this.createLogUser(
-            await 'user', param + ' ' + await this.formData.email
-          );
-        }
-        */
-        await this.$store.dispatch('loadLoggedIn', 0);
-        await this.$store.dispatch('loadToken', '');
-        await this.$store.dispatch('loadUserData', this.userDataDefault);
-        this.responseData = await [];
-        await sessionStorage.removeItem('localToken');
-        await this.loadRoute('Login', {});
-      },
-      //
-      async loadRoute (route, param) {
-        if(await this.$route.name !== route){
-          await this.$router.push({ name: route, params: param });
-        }
-      },
-      //
-      async calldata (apiRoute, formData, Token ) {
+      async calldataOLD (apiRoute, formData, Token ) {
         this.responseData = await [];
         let msgError = '';
         await axios({
@@ -175,16 +219,12 @@ export default {
         }
       },
       //
-      async createLogUser (email, event) {
+      async createLogUserOLD (email, event) {
         let apiRoute = await 'loguser';
         let formData = await {'email': email, 'event': event};
         let Token = await this.token;
         await this.calldata(apiRoute, formData, Token);
       },
-      async getOverlay (val){
-        await new Promise(resolve => setTimeout(resolve, val));
-        await this.$store.dispatch('loadOverlay', 0);
-      }
       //
     },
     created () {

@@ -51,10 +51,13 @@
         Aceptar
       </v-btn>
     </div>
+    
+    
 
   </v-container>
 </template>
 <script>
+import axios from 'axios';
   export default {
     name: 'Loginform',
     props: {
@@ -67,20 +70,74 @@
       //
       username: '',
       password: '',
-      showPass: false,
+      // responseData: 'RESPONSEDATA',
+      // showPass: false,
       //
-      // logButton: 1,
+      
     }),
     methods: {
       initialize: function () {
         //
       },
       async checkLogin () {
+        let msg = 'Validando Usuario. Por favor espere...';
+        let msgtype = 'info';
+        await this.displayMsg(msg, msgtype);
+        await this.getOverlay(3000);
+        let formData = await {
+          email: this.username, 
+          password: this.password,
+          evento: ''
+        };
+        await this.setToken('');
+        let responseData = await this.getToken(formData);
+        if(await responseData.token){
+          msg = await 'Acceso permitido. Por favor espere...';
+          msgtype = await 'success';
+          await this.setToken(responseData.token);
+          await this.loadRoute('Logged', {});
+        } else {
+          msg = await 'Error. Usuario o contraseña no valida. Acceso NO permitido.';
+          msgtype = await 'error';
+        }
+        await this.displayMsg(msg, msgtype);
+      },
+      async getToken (formData) {
         //
-        await this.$store.dispatch('loadMessage', {
-            msg: 'Validando Usuario. Por favor espere...', type: 'success'
+        let apiRoute = await 'login';
+        let Token = await '';
+        let msgError = '';
+        let responseData = '';
+        await axios({
+          method: 'post', url: this.urlApi + '/' + apiRoute,
+          responseType: 'json',
+          data: formData,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Token
+          }
+          })
+          .then(response => {
+            responseData = response.data;
+          })
+          .catch(e => {
+            if (!e.response) {
+              // network error
+              this.errorStatus = 'Error: Network Error';
+              this.$store.dispatch('loadMessage', {
+                msg: this.errorStatus, type: 'error'
+              });
+            } else {
+              this.errorStatus = e.response.data.message;
+              if (e.response.status){
+                msgError = 'Error: ' + e.response.status + ' ' + e.response.data.error;
+                console.log(msgError);
+                this.responseData = e.response.data;
+              }
+              console.log( '*** ' + this.$route.name + ' *** an error occurred !! ' + e );
+            }
         });
-        await this.$store.dispatch('loadOverlay', 1);
+        return responseData;
         //
       },
       keymonitor: function (event) {
