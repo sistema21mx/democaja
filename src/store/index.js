@@ -5,11 +5,93 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    loggedIn: 0,
+    token: '',
+    overlay: false,
+    json_Snackbar: {
+      snackbar: false,
+      y: 'top',
+      color: 'green',
+      mode: '',
+      timeout: 3000,
+      text: '',
+      autoheight: true
+    },
+    userData: {},
+    protocol: location.protocol + '//', 
+    hostName: location.hostname, 
+    appName: 'demodoc',
+    apiName: 'demodocapi',
+    apiRoute: '/api',
+    portNumber: ':8000',
   },
   mutations: {
+    setLoggedIn (state, payload) {
+      state.loggedIn = payload
+    },
+    setToken (state, payload) {
+      state.token = payload
+    },
+    setUserData (state, payload) {
+      state.userData = payload
+    },
+    setMessage (state, payload) {
+      state.json_Snackbar.snackbar = true
+      state.json_Snackbar.text = payload.msg
+      state.json_Snackbar.color = payload.type
+      if(state.loggedIn === 0){state.json_Snackbar.timeout = 3500}
+      if ( payload !== '') {
+        //
+      }
+    },
+    setOverlay (state, payload) {
+      state.overlay = payload
+    },
   },
   actions: {
+    loadLoggedIn ({commit}, payload) {
+      commit('setLoggedIn', payload)
+    },
+    loadToken ({commit}, payload) {
+      commit('setToken', payload)
+    },
+    loadMessage ({commit}, payload) {
+      commit('setMessage', payload)
+    },
+    loadOverlay ({commit}, payload) {
+      commit('setOverlay', payload)
+    },
+    loadUserData ({commit}, payload) {
+      commit('setUserData', payload)
+    },
   },
   modules: {
+  },
+  getters: {
+    getLoggedIn (state) {
+      return state.loggedIn
+    },
+    getToken (state) {
+      return state.token
+    },
+    getJson_Snackbar (state) {
+      return state.json_Snackbar
+    },
+    getUrlApi (state) {
+      if (state.hostName === 'localhost'){
+        return (state.protocol + state.hostName + 
+                state.portNumber + state.apiRoute)
+      } else {
+        return (state.protocol + 
+          state.hostName.replace(state.appName, state.apiName) + 
+          state.apiRoute)
+      }
+    },
+    getUserData (state) {
+      return state.userData
+    },
+    getOverlay (state) {
+      return state.overlay
+    },
   }
 })

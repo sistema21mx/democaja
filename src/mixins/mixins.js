@@ -7,8 +7,9 @@ export default {
         name: '',
         email: '',
       },
-      processing: 0,
+      // processing: 0,
       // disabledButton: 0,
+      //
     }),
     methods: {
       //
@@ -180,6 +181,10 @@ export default {
         let Token = await this.token;
         await this.calldata(apiRoute, formData, Token);
       },
+      async getOverlay (val){
+        await new Promise(resolve => setTimeout(resolve, val));
+        await this.$store.dispatch('loadOverlay', 0);
+      }
       //
     },
     created () {
