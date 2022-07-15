@@ -18,7 +18,6 @@ export default {
         await document.getElementById(val).focus()
       },
       async closeApp () { // param
-        await this.$store.dispatch('loadLoggedIn', 0);
         await this.setToken('');
         await this.loadRoute('Login', {});
 
@@ -36,7 +35,6 @@ export default {
           );
         }
         //
-        await this.$store.dispatch('loadLoggedIn', 0);
         await this.$store.dispatch('loadToken', '');
         await this.$store.dispatch('loadUserData', this.userDataDefault);
         this.responseData = await [];
@@ -59,11 +57,13 @@ export default {
       },
       async setToken (val){
         //
+        await this.$store.dispatch('loadToken', val);
         if(await val === ''){
           await sessionStorage.removeItem('localToken');
+          await this.$store.dispatch('loadLoggedIn', 0);
         } else {
-          await this.$store.dispatch('loadToken', val);
           await sessionStorage.setItem('localToken', JSON.stringify(val));
+          await this.$store.dispatch('loadLoggedIn', 1);
         }
       },
       //
@@ -82,7 +82,6 @@ export default {
           );
         }
         */
-        await this.$store.dispatch('loadLoggedIn', 0);
         await this.$store.dispatch('loadToken', '');
         await this.$store.dispatch('loadUserData', this.userDataDefault);
         this.responseData = await [];
@@ -165,7 +164,6 @@ export default {
           // await alert(JSON.stringify(this.responseData));
           await this.$store.dispatch('loadMenuItemList', this.responseData.data);
           */
-          await this.$store.dispatch('loadLoggedIn', 1);
           await this.loadRoute('Logged', {});
         }
       },
