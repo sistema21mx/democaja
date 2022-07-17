@@ -109,7 +109,7 @@ export default {
       json_snackbar () {
         return this.$store.getters.getJson_Snackbar
       },
-      overlay () {
+      timeOverlay () {
         return this.$store.getters.getOverlay
       },
       loggedIn () {

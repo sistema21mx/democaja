@@ -6,18 +6,19 @@
       dark
       dense
     >
+      <v-app-bar-nav-icon @click.stop="drawer = true" v-show="loggedIn === 1"></v-app-bar-nav-icon>
       <v-toolbar-title>{{userData.name}}</v-toolbar-title>
       <div class="d-flex align-center">
       </div>
 
       <v-spacer></v-spacer>
-      <v-btn
+      <!-- v-btn
         v-show="($route.name === 'Logged')"
         text
         @click.stop = "exitApp();"
         >
         <span>Salir</span>
-      </v-btn>
+      </v-btn -->
       <v-btn
         v-show="($route.name === 'Login')"
         text
@@ -35,17 +36,80 @@
 
     </v-app-bar>
 
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+      >
+      <v-list
+        nav
+        dense
+        >
+        <v-list-item-group
+          v-model="group"
+          active-class="blue-grey--text text--accent-4"
+          >
+
+
+          <v-list-item to="/logged">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Inicio</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item
+            v-for="item in itemsMenu"
+            :to="{ name: item.link, params: {title: item.title} }"
+            :key="item.id"
+            link
+            >
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.label }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item to="/logout">
+            <v-list-item-icon>
+              <v-icon>mdi-exit-to-app</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Salir</v-list-item-title>
+          </v-list-item>
+
+          <!-- v-list-item @click.stop="">
+            <v-list-item-icon>
+              <v-icon>mdi-exit-to-app</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Salir</v-list-item-title>
+          </v-list-item -->
+
+
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+
     <v-main>
       <router-view/>
     </v-main>
     <DIV v-show="urlApi.includes('localhost')">
+      <v-btn
+        x-small
+        color="secondary"
+        to="/test"
+        >
+        Test Form
+      </v-btn> <BR/>
       LOGGEDIN {{loggedIn}} / ROUTERNAME {{$route.name}} / BREAKPOINT {{this.$vuetify.breakpoint.name}} <BR/>
       PARAMS {{$route.params}} <BR/>
       USERDATA {{userData}} <BR/>
       <v-text-field label="Token" v-model="token" disabled></v-text-field><BR/>
       
     </DIV>
-    <v-overlay :value="overlay">
+    <v-overlay :value="timeOverlay">
       <v-progress-circular indeterminate size="100"></v-progress-circular>
     </v-overlay>
     <v-snackbar
@@ -61,6 +125,7 @@
       >
       {{ json_snackbar.text }}
     </v-snackbar>
+    DRAWER {{drawer}}
   </v-app>
 </template>
 <script>
@@ -74,6 +139,14 @@
     },
     data: () => ({
       //
+      drawer: false,
+      group: null,
+      itemsMenu: [{
+        id:"1",
+        label: 'label',
+        icon: 'mdi-emoticon-happy-outline',
+        link: 'Home',
+      }]
     }),
     methods: {
       initialize: function () {

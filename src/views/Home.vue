@@ -9,6 +9,13 @@
         >
       </v-img>
     </v-flex>
+    <v-row class="text-center">
+      <v-col class="mb-4" cols="12">
+        <h1 class="display-2 font-weight-bold mb-3 font-italic">
+          Bienvenido
+        </h1>
+      </v-col>
+    </v-row>
     <!-- img alt="Vue logo" src="../assets/logo.png" -->
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
