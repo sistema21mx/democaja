@@ -63,7 +63,6 @@
     </v-snackbar>
   </v-app>
 </template>
-
 <script>
   export default {
     name: 'App',
@@ -81,13 +80,12 @@
         //
       },
       exitApp: async function () {
-        //
         this.closeApp();
       },
-      getback: async function () {
-        await this.$store.dispatch('loadLoggedIn', 1);
-        let localToken = await JSON.parse(sessionStorage.getItem('localToken'));
-        await this.setToken(localToken);
+      getback: function () {
+        this.$store.dispatch('loadLoggedIn', 1);
+        let localToken = JSON.parse(sessionStorage.getItem('localToken'));
+        this.setToken(localToken);
         // await this.getTokenInfo();
         // await this.getMenuItemList();
       },
@@ -96,12 +94,11 @@
       }
     },
     created () {
-      //
-    },
-    mounted () {
       if (sessionStorage.getItem('localToken')) {
         this.getback();
       }
+    },
+    mounted () {
       if (this.loggedIn == 1 && this.$route.name !== 'Logged'){
         this.loadRoute('Logged', {});
       }
@@ -114,13 +111,9 @@
     },
     watch: {
       //
-      overlay () {
-        // this.getOverlay(5000);
-      }
     },
     computed: {
       //
     }
   }
 </script>
-

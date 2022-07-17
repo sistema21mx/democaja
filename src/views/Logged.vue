@@ -8,6 +8,14 @@
         height="100"
       ></v-img>
     </v-flex>
+    <v-btn
+      @click.stop = "initialize();"
+      >
+      <span>Buscar</span>
+    </v-btn>
+    <v-text-field label="Token" v-model="token"></v-text-field>
+    RESPONSEDATA
+    {{responseData}}
   </div>
 </template>
 <script>
@@ -21,10 +29,14 @@
     },
     data: () => ({
       //
+      responseData: '',
     }),
     methods: {
-      initialize: function () {
-        //
+      initialize: async function () {
+        let formData = await {};
+        let apiRoute = await 'user'; // userall
+        let token = await this.token;
+        this.responseData = await this.getApi(apiRoute, formData, token);
       },
       processData: function () {
         //
@@ -35,6 +47,7 @@
     },
     mounted () {
       //
+      this.initialize();
     },
     updated () {
       //

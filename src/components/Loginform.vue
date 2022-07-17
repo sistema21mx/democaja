@@ -51,13 +51,9 @@
         Aceptar
       </v-btn>
     </div>
-    
-    
-
   </v-container>
 </template>
 <script>
-import axios from 'axios';
   export default {
     name: 'Loginform',
     props: {
@@ -67,30 +63,27 @@ import axios from 'axios';
       //
     },
     data: () => ({
-      //
       username: '',
-      password: '',
-      // responseData: 'RESPONSEDATA',
-      // showPass: false,
-      //
-      
+      password: '',      
     }),
     methods: {
       initialize: function () {
         //
       },
       async checkLogin () {
-        let msg = 'Validando Usuario. Por favor espere...';
-        let msgtype = 'info';
+        let msg = await 'Validando Usuario. Por favor espere...';
+        let msgtype = await 'info';
         await this.displayMsg(msg, msgtype);
         await this.getOverlay(3000);
+        await this.setToken('');
         let formData = await {
           email: this.username, 
           password: this.password,
           evento: ''
         };
-        await this.setToken('');
-        let responseData = await this.getToken(formData);
+        let apiRoute = await 'login';
+        let token = await '';
+        let responseData = await this.getApi(apiRoute, formData, token);
         if(await responseData.token){
           msg = await 'Acceso permitido. Por favor espere...';
           msgtype = await 'success';
@@ -101,44 +94,6 @@ import axios from 'axios';
           msgtype = await 'error';
         }
         await this.displayMsg(msg, msgtype);
-      },
-      async getToken (formData) {
-        //
-        let apiRoute = await 'login';
-        let Token = await '';
-        let msgError = '';
-        let responseData = '';
-        await axios({
-          method: 'post', url: this.urlApi + '/' + apiRoute,
-          responseType: 'json',
-          data: formData,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + Token
-          }
-          })
-          .then(response => {
-            responseData = response.data;
-          })
-          .catch(e => {
-            if (!e.response) {
-              // network error
-              this.errorStatus = 'Error: Network Error';
-              this.$store.dispatch('loadMessage', {
-                msg: this.errorStatus, type: 'error'
-              });
-            } else {
-              this.errorStatus = e.response.data.message;
-              if (e.response.status){
-                msgError = 'Error: ' + e.response.status + ' ' + e.response.data.error;
-                console.log(msgError);
-                this.responseData = e.response.data;
-              }
-              console.log( '*** ' + this.$route.name + ' *** an error occurred !! ' + e );
-            }
-        });
-        return responseData;
-        //
       },
       keymonitor: function (event) {
         if (event.key === 'Enter' &&
@@ -158,12 +113,16 @@ import axios from 'axios';
             this.getFocus('usuario');
         }
       }, 500)
-      //
     },
     mounted () {
-      if (this.loggedIn === 1) {
+      if (this.loggedIn === 1 && sessionStorage.getItem('localToken')) {
         this.loadRoute('Logged', {});
       }
+      /*
+      if (this.loggedIn === 1 && sessionStorage.getItem('localToken')) {
+        this.loadRoute('Logged', {});
+      }
+      */
       if(this.urlApi.includes('localhost')){
         this.username = 'user';
         this.password = 'admin';
