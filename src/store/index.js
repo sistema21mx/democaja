@@ -17,7 +17,7 @@ export default new Vuex.Store({
       text: '',
       autoheight: true
     },
-    userData: {},
+    userData: {name: ''},
     protocol: location.protocol + '//', 
     hostName: location.hostname, 
     appName: 'democaja',

@@ -6,6 +6,7 @@
       dark
       dense
     >
+      <v-toolbar-title>{{userData.name}}</v-toolbar-title>
       <div class="d-flex align-center">
       </div>
 
@@ -38,12 +39,11 @@
       <router-view/>
     </v-main>
     <DIV v-show="urlApi.includes('localhost')">
-      ROUTERNAME {{$route.name}} <BR/>
+      LOGGEDIN {{loggedIn}} / ROUTERNAME {{$route.name}} / BREAKPOINT {{this.$vuetify.breakpoint.name}} <BR/>
       PARAMS {{$route.params}} <BR/>
-      BREAKPOINT {{this.$vuetify.breakpoint.name}} <BR/>
-      LOGGEDIN {{loggedIn}} <BR/>
       USERDATA {{userData}} <BR/>
-      TOKEN {{token}} <BR/>
+      <v-text-field label="Token" v-model="token" disabled></v-text-field><BR/>
+      
     </DIV>
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="100"></v-progress-circular>
@@ -99,18 +99,34 @@
       }
     },
     mounted () {
+      /* rev
       if (this.loggedIn == 1 && this.$route.name !== 'Logged'){
         this.loadRoute('Logged', {});
       }
       if (this.loggedIn == 0 && this.$route.name !== 'Home'){
         this.loadRoute('Home', {});
       }
+      */
     },
     updated () {
       //
     },
     watch: {
       //
+      /* rev
+      loggedIn (val) {
+        if(val === 1){
+          this.loadRoute('Logged', {});
+        }
+      },
+      
+      '$route.name' (val) {
+        if(val === 'Login' && this.loggedIn === 1){
+          // alert(val);
+          this.loadRoute('Logged', {});
+        }
+      }
+      */
     },
     computed: {
       //

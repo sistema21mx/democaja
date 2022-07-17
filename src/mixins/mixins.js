@@ -8,40 +8,36 @@ export default {
       },
     }),
     methods: {
-      getFocus: async function (val) {
-        await new Promise(resolve => setTimeout(resolve, 500)) // Pause
-        await document.getElementById(val).focus()
+      getFocus: function (val) {
+        // await new Promise(resolve => setTimeout(resolve, 500)) // Pause
+        setTimeout(() => { document.getElementById(val).focus(); }, 1000);
       },
-      async closeApp () { // param
-        await this.setToken('');
-        await this.loadRoute('Login', {});
+      closeApp () { // param
+        this.$store.dispatch('loadUserData', {name: ''});
+        this.setToken('');
+        this.loadRoute('Login', {});
       },
-      async loadRoute (route, param) {
-        if(await this.$route.name !== route){
-          await this.$router.push({ name: route, params: param });
+      loadRoute (route, param) {
+        if(this.$route.name !== route){
+          this.$router.push({ name: route, params: param });
         }
       },
-      async getOverlay (val){
-        await this.$store.dispatch('loadOverlay', 1);
-        await new Promise(resolve => setTimeout(resolve, val));
-        await this.$store.dispatch('loadOverlay', 0);
+      displayMsg (msgtxt, msgtype){
+        this.$store.dispatch('loadMessage', {msg: msgtxt, type: msgtype});
       },
-      async displayMsg (msgtxt, msgtype){
-        await this.$store.dispatch('loadMessage', {msg: msgtxt, type: msgtype});
-      },
-      async setToken (val){
-        await this.$store.dispatch('loadToken', val);
-        if(await val === ''){
-          await sessionStorage.removeItem('localToken');
-          await this.$store.dispatch('loadLoggedIn', 0);
+      setToken (val){
+        this.$store.dispatch('loadToken', val);
+        if(val === ''){
+          sessionStorage.removeItem('localToken');
+          this.$store.dispatch('loadLoggedIn', 0);
         } else {
-          await sessionStorage.setItem('localToken', JSON.stringify(val));
-          await this.$store.dispatch('loadLoggedIn', 1);
+          sessionStorage.setItem('localToken', JSON.stringify(val));
+          this.$store.dispatch('loadLoggedIn', 1);
         }
       },
       async getApi (apiRoute, formData, token) {
-        let msgError = '';
-        let responseData = '';
+        let msgError = await '';
+        let responseData = await '';
         await axios({
           method: 'post', url: this.urlApi + '/' + apiRoute,
           responseType: 'json',
@@ -71,18 +67,22 @@ export default {
               console.log( '*** ' + this.$route.name + ' *** an error occurred !! ' + e );
             }
         });
-        if(responseData.status == 'Token is Invalid'){
+        if(await (responseData.status === 'Token is Invalid' || responseData.status === 'Authorization Token not found')){
           //
-          let msg = 'Aviso. Su sesion expiro. vuelva a ingresar.';
-          let msgtype = 'info';
-          this.displayMsg(msg, msgtype)
-          this.setToken('');
-          setTimeout(() => (
-            this.loadRoute('Login', {})
-          ), 1000)
+          let msg = await 'Aviso. Su sesion expiro. vuelva a ingresar.';
+          let msgtype = await 'info';
+          await this.displayMsg(msg, msgtype)
+          await this.setToken('');
+          await this.loadRoute('Login', {});
         } else {
-          return responseData;
+          // return responseData;
         }
+        return responseData;
+      },
+      getOverlay (val){
+        this.$store.dispatch('loadOverlay', 1);
+        // await new Promise(resolve => setTimeout(resolve, val));
+        setTimeout(() => { this.$store.dispatch('loadOverlay', 0); }, val);
       },
       //
       //

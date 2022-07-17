@@ -28,6 +28,9 @@ import Loginform from '@/components/Loginform.vue'
       //
     },
     mounted () {
+      if (this.loggedIn == 1){
+        this.loadRoute('Logged', {});
+      }
       //
     },
     updated () {

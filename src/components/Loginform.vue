@@ -81,9 +81,12 @@
           password: this.password,
           evento: ''
         };
+        
         let apiRoute = await 'login';
         let token = await '';
         let responseData = await this.getApi(apiRoute, formData, token);
+        // await alert(responseData);
+        // await  console.log(responseData);
         if(await responseData.token){
           msg = await 'Acceso permitido. Por favor espere...';
           msgtype = await 'success';
@@ -115,10 +118,7 @@
       }, 500)
     },
     mounted () {
-      if (this.loggedIn === 1 && sessionStorage.getItem('localToken')) {
-        this.loadRoute('Logged', {});
-      }
-      /*
+      /* rev
       if (this.loggedIn === 1 && sessionStorage.getItem('localToken')) {
         this.loadRoute('Logged', {});
       }
