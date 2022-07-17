@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Logged from '../views/Logged.vue'
 import Logout from '../views/Logout.vue'
 import Test from '../views/Test.vue'
+import User from '../views/User.vue'
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes = [
     component: Logout
   },
   {
+    path: '/user',
+    name: 'User',
+    component: User
+  },
+  {
     path: '/test',
     name: 'Test',
     component: Test
@@ -45,7 +51,10 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  }
 })
 
 export default router

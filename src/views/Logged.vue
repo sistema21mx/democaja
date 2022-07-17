@@ -33,10 +33,19 @@
     methods: {
       initialize: async function () {
         let formData = await {};
-        let apiRoute = await 'user'; // userall
+        let apiRoute = await 'user';
         let token = await this.token;
         let responseData = await this.getApi(apiRoute, formData, token);
         await this.$store.dispatch('loadUserData', responseData);
+        formData = await {};
+        apiRoute = await 'profile/' + this.userData.id;
+        // responseData = await {};
+        responseData = await this.getApi(apiRoute, formData, token);
+        await this.$store.dispatch('loadMenuItemList', responseData.data);
+        // console.log(responseData);
+
+
+
       },
       processData: function () {
         //

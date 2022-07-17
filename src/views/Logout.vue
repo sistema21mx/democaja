@@ -66,13 +66,6 @@
       }
     },
     computed: {
-        classform() {
-        if (this.$vuetify.breakpoint.name === 'xs'){
-            return 'text-h5 pa-6 text-center';
-        } else {
-            return 'text-h2 pa-12 text-center';
-        }
-        }
       //
     }
   }

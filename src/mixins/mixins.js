@@ -67,7 +67,9 @@ export default {
               console.log( '*** ' + this.$route.name + ' *** an error occurred !! ' + e );
             }
         });
-        if(await (responseData.status === 'Token is Invalid' || responseData.status === 'Authorization Token not found')){
+        if(await (responseData.status === 'Token is Invalid' ||
+                  responseData.status === 'Authorization Token not found' ||
+                  responseData.status === 'Token is Expired')){
           //
           let msg = await 'Aviso. Su sesion expiro. vuelva a ingresar.';
           let msgtype = await 'info';
@@ -123,6 +125,16 @@ export default {
       },
       userData () {
         return this.$store.getters.getUserData
+      },
+      menuItemList () {
+        return this.$store.getters.getMenuItemList
+      },
+      classform() {
+        if (this.$vuetify.breakpoint.name === 'xs'){
+            return 'text-h5 pa-6 text-center';
+        } else {
+            return 'text-h2 pa-12 text-center';
+        }
       },
     }
 }

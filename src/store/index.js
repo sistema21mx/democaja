@@ -17,7 +17,15 @@ export default new Vuex.Store({
       text: '',
       autoheight: true
     },
-    userData: {name: ''},
+    menuItemList: [{
+      id:"1",
+      label: 'label', 
+      icon: 'mdi-emoticon-happy-outline', 
+      link: 'Home'
+    }],
+    userData: {
+      name: ''
+    },
     protocol: location.protocol + '//', 
     hostName: location.hostname, 
     appName: 'democaja',
@@ -44,6 +52,9 @@ export default new Vuex.Store({
         //
       }
     },
+    setMenuItemList (state, payload) {
+      state.menuItemList = payload
+    },
     setOverlay (state, payload) {
       state.overlay = payload
     },
@@ -60,6 +71,9 @@ export default new Vuex.Store({
     },
     loadOverlay ({commit}, payload) {
       commit('setOverlay', payload)
+    },
+    loadMenuItemList ({commit}, payload) {
+      commit('setMenuItemList', payload)
     },
     loadUserData ({commit}, payload) {
       commit('setUserData', payload)
@@ -89,6 +103,9 @@ export default new Vuex.Store({
     },
     getUserData (state) {
       return state.userData
+    },
+    getMenuItemList (state) {
+      return state.menuItemList
     },
     getOverlay (state) {
       return state.overlay

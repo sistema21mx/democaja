@@ -125,7 +125,6 @@
       >
       {{ json_snackbar.text }}
     </v-snackbar>
-    DRAWER {{drawer}}
   </v-app>
 </template>
 <script>
@@ -142,7 +141,7 @@
       drawer: false,
       group: null,
       itemsMenu: [{
-        id:"1",
+        id:"0",
         label: 'label',
         icon: 'mdi-emoticon-happy-outline',
         link: 'Home',
@@ -186,20 +185,11 @@
     },
     watch: {
       //
-      /* rev
-      loggedIn (val) {
-        if(val === 1){
-          this.loadRoute('Logged', {});
+      menuItemList () {
+        if(this.$route.name !== 'Home' || this.$route.name !== 'login'){
+          this.itemsMenu = this.menuItemList;
         }
       },
-      
-      '$route.name' (val) {
-        if(val === 'Login' && this.loggedIn === 1){
-          // alert(val);
-          this.loadRoute('Logged', {});
-        }
-      }
-      */
     },
     computed: {
       //
