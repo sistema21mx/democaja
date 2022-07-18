@@ -119,7 +119,7 @@
 </template>
 <script>
   export default {
-    name: 'UserList',
+    name: 'ItemList',
     props: {
       //
     },
@@ -127,21 +127,19 @@
       //
     },
     data: () => ({
-      //
       headers: [
-        { text: 'Nombre', value: 'name' },
+        { text: 'Codigo', value: 'code' },
         {
-            text: 'Usuario',
+            text: 'Nombre',
             align: 'start',
-            value: 'email',
+            value: 'name',
         },
         {
-            text: 'email',
-            align: 'left',
+            text: 'Precio',
+            align: 'right',
             sortable: true,
-            value: 'personalemail',
+            value: 'priceCurrency',
         },      
-        { text: 'movil', value: 'movil' },
         {
             text: 'Activo',
             align: 'left',
@@ -152,10 +150,10 @@
       ],
       itemlist: [{
         id: '',
+        code: '',
         name: '',
-        email: '',
-        personalemail: '',
-        movil: ''
+        priceCurrency: '0',
+        active: '1',
       }],
       search: '',
       disableSort: false,
@@ -179,8 +177,8 @@
       initialize: function () {
         //
       },
-      async userList () {
-        let apiRoute = await 'userall';
+      async itemList () {
+        let apiRoute = await 'itemall';
         let formData = await {};
         let token = await this.token;
         let responseData = await this.getApi(apiRoute, formData, token);
@@ -194,7 +192,7 @@
       //
     },
     mounted () {
-      this.userList()
+      this.itemList()
     },
     updated () {
       //

@@ -1,21 +1,22 @@
 <template>
-  <div class="pa-0 ma-0">
-    <UserList v-if="(Object.keys(itemRow).length) === 0" @clickItemRow="updateItemRow" class="pa-0 ma-0" />
-    <UserEdit v-if="(Object.keys(itemRow).length) > 0" @clickItemRow="updateItemRow" :itemRow="itemRow" class="pa-0 ma-0" />
+  <div>
+    <ItemList v-if="(Object.keys(itemRow).length) === 0" @clickItemRow="updateItemRow" class="pa-0 ma-0" />
+    <ItemEdit v-if="(Object.keys(itemRow).length) > 0" @clickItemRow="updateItemRow" :itemRow="itemRow" class="pa-0 ma-0" />
   </div>
 </template>
 <script>
-import UserList from '@/components/UserList.vue'
-import UserEdit from '@/components/UserEdit.vue'
+import ItemList from '@/components/ItemList.vue'
+import ItemEdit from '@/components/ItemEdit.vue'
   export default {
-    name: 'User',
+    name: 'Item',
     props: {
       //
     },
     components: {
-      UserList, UserEdit
+      ItemList, ItemEdit
     },
     data: () => ({
+      //
       itemRow: {},
     }),
     methods: {

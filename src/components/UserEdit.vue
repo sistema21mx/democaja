@@ -96,7 +96,7 @@
 </template>
 <script>
   export default {
-    name: 'componentEmpty',
+    name: 'UserEdit',
     props: [
       'itemRow'
     ],
@@ -129,12 +129,6 @@
         if(await this.validationFields()){
           await this.getOverlay(2000);
           let apiRoute = this.formData.id === 0? 'usercreate' : 'userupdate';
-
-          /*
-          this.formData.name = (await this.formData.firstname + ' ' + 
-            await this.formData.midname + ' ' + 
-            await this.formData.lastname).trim();
-          */
           this.formData.name = (await this.formData.firstname + ' ' + 
             await this.formData.midname).trim();
           if(this.formData.lastname !== '' || this.formData.lastname !== null){

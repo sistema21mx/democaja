@@ -8,7 +8,7 @@
 import UserList from '@/components/UserList.vue'
 import UserProfile from '@/components/UserProfile.vue'
   export default {
-    name: 'viewEmpty',
+    name: 'Profile',
     props: {
       //
     },
