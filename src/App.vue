@@ -193,10 +193,18 @@
           }
         }
         // alert(JSON.stringify(val))
+      },
+      upPage (val) {
+        if(val === 1){
+          window.scrollTo(0,0);
+          this.$store.dispatch('loadUpPage', 0);
+        }
       }
     },
     computed: {
-      //
+      upPage () {
+        return this.$store.getters.getUpPage
+      },
     }
   }
 </script>

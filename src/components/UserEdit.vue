@@ -90,7 +90,6 @@
     </v-card>
     <DIV v-show="urlApi.includes('localhost')">
       FORMDATA {{formData}} <BR/>
-      response {{response}} <BR/>
     </DIV>
   </v-container>
   
@@ -121,8 +120,6 @@
         "name": "",
         "password": "",
       },
-      //
-      response: [],
     }),
     methods: {
       initialize: function () {

@@ -16,7 +16,6 @@ import UserEdit from '@/components/UserEdit.vue'
       UserList, UserEdit
     },
     data: () => ({
-      //
       itemRow: {},
     }),
     methods: {
@@ -25,6 +24,7 @@ import UserEdit from '@/components/UserEdit.vue'
       },
       updateItemRow: function (val) {
         window.scrollTo(0,0);
+        // this.$store.dispatch('loadUpPage', 1);
         this.itemRow = val;
       },
       processData: function () {

@@ -13,9 +13,6 @@ export default {
         // await new Promise(resolve => setTimeout(resolve, 500)) // Pause
         setTimeout(() => { document.getElementById(val).focus(); }, 1000);
       },
-      scrollToTop() {
-        window.scrollTo(0,0);
-      },
       makeString (length) {
         let result = '';
         let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

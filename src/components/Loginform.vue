@@ -29,14 +29,19 @@
         cols="12"
         sm="6"
         >
-          <v-text-field
-            id="password"
-            name="password"
-            v-model="password"
-            label="Contraseña"
-            type="password"
-            dense outlined
-            v-on:keyup="keymonitor"
+        <v-text-field
+          v-model="password"
+          label="Contrasena"
+          id="password"
+          name="password"
+          :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="showPass ? 'text' : 'password'"
+          prepend-inner-icon="mdi-lock"
+          outlined
+          clearable
+          dense
+          v-on:keyup="keymonitor"
+          @click:append="showPass = !showPass"
           >
         </v-text-field>
       </v-col>
@@ -64,7 +69,8 @@
     },
     data: () => ({
       username: '',
-      password: '',      
+      password: '',
+      showPass: false,
     }),
     methods: {
       initialize: function () {

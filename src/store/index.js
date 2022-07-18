@@ -9,6 +9,7 @@ export default new Vuex.Store({
     token: '',
     overlay: false,
     titleForm: '',
+    upPage: 0,
     json_Snackbar: {
       snackbar: false,
       y: 'top',
@@ -62,6 +63,9 @@ export default new Vuex.Store({
     setOverlay (state, payload) {
       state.overlay = payload
     },
+    setUpPage (state, payload) {
+      state.upPage = payload
+    },
   },
   actions: {
     loadLoggedIn ({commit}, payload) {
@@ -84,6 +88,12 @@ export default new Vuex.Store({
     },
     loadUserData ({commit}, payload) {
       commit('setUserData', payload)
+    },
+    loadUpPage ({commit}, payload) {
+      commit('setUpPage', payload)
+    },
+    getUpPage (state) {
+      return state.upPage
     },
   },
   modules: {
