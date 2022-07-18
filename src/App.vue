@@ -6,7 +6,7 @@
       dark
       dense
       >
-      <v-app-bar-nav-icon @click.stop="drawer = true" v-show="loggedIn === 1"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = true" v-show="loggedIn === 1 && titleForm === ''"></v-app-bar-nav-icon>
       <!-- v-toolbar-title>{{userData.name}}</v-toolbar-title -->
       <div :class="classappbarform">{{userData.name}}</div>
       <div :class="classappbarform" v-show="titleForm !== ''">&nbsp;-&nbsp;{{titleForm}}</div>

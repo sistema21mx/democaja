@@ -8,6 +8,7 @@ import Logged from '../views/Logged.vue'
 import Logout from '../views/Logout.vue'
 import Test from '../views/Test.vue'
 import User from '../views/User.vue'
+import Profile from '../views/Profile.vue'
 import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
@@ -49,6 +50,12 @@ const routes = [
     path: '/user',
     name: 'User',
     component: User,
+    meta: { requiresAuth: true}
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
     meta: { requiresAuth: true}
   },
   {
