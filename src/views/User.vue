@@ -1,30 +1,31 @@
 <template>
   <div>
-    <v-flex>
-      <v-img
-        :src="require('@/assets/logo.png')"
-        class="ma-0"
-        contain
-        height="100"
-      ></v-img>
-    </v-flex>
+    <UserList v-if="(Object.keys(itemRow).length) === 0" @clickItemRow="updateItemRow"/><BR/>
+    <UserEdit v-if="(Object.keys(itemRow).length) > 0" @clickItemRow="updateItemRow" :itemRow="itemRow"/>
   </div>
 </template>
 <script>
+import UserList from '@/components/UserList.vue'
+import UserEdit from '@/components/UserEdit.vue'
   export default {
     name: 'viewEmpty',
     props: {
       //
     },
     components: {
-      //
+      UserList, UserEdit
     },
     data: () => ({
       //
+      itemRow: {},
     }),
     methods: {
       initialize: function () {
         //
+      },
+      updateItemRow: function (val) {
+        window.scrollTo(0,0);
+        this.itemRow = val;
       },
       processData: function () {
         //

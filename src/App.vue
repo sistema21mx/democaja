@@ -5,11 +5,12 @@
       color="primary"
       dark
       dense
-    >
+      >
       <v-app-bar-nav-icon @click.stop="drawer = true" v-show="loggedIn === 1"></v-app-bar-nav-icon>
-      <v-toolbar-title>{{userData.name}}</v-toolbar-title>
-      <div class="d-flex align-center">
-      </div>
+      <!-- v-toolbar-title>{{userData.name}}</v-toolbar-title -->
+      <div :class="classappbarform">{{userData.name}}</div>
+      <div :class="classappbarform" v-show="titleForm !== ''">&nbsp;-&nbsp;{{titleForm}}</div>
+      
 
       <v-spacer></v-spacer>
       <!-- v-btn
@@ -49,8 +50,6 @@
           v-model="group"
           active-class="blue-grey--text text--accent-4"
           >
-
-
           <v-list-item to="/logged">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
@@ -79,14 +78,6 @@
             <v-list-item-title>Salir</v-list-item-title>
           </v-list-item>
 
-          <!-- v-list-item @click.stop="">
-            <v-list-item-icon>
-              <v-icon>mdi-exit-to-app</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Salir</v-list-item-title>
-          </v-list-item -->
-
-
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -107,7 +98,6 @@
       PARAMS {{$route.params}} <BR/>
       USERDATA {{userData}} <BR/>
       <v-text-field label="Token" v-model="token" disabled></v-text-field><BR/>
-      
     </DIV>
     <v-overlay :value="timeOverlay">
       <v-progress-circular indeterminate size="100"></v-progress-circular>
@@ -171,14 +161,9 @@
       }
     },
     mounted () {
-      /* rev
       if (this.loggedIn == 1 && this.$route.name !== 'Logged'){
         this.loadRoute('Logged', {});
       }
-      if (this.loggedIn == 0 && this.$route.name !== 'Home'){
-        this.loadRoute('Home', {});
-      }
-      */
     },
     updated () {
       //
@@ -190,6 +175,17 @@
           this.itemsMenu = this.menuItemList;
         }
       },
+      '$route.name' (val) {
+        this.$store.dispatch('loadTitleForm', '');
+        if((Object.keys(this.menuItemList).length) > 0 ){
+          for (var i=0; i < this.menuItemList.length; i++) {
+            if (this.menuItemList[i].link === val) {
+              this.$store.dispatch('loadTitleForm', this.menuItemList[i].title);
+            }
+          }
+        }
+        // alert(JSON.stringify(val))
+      }
     },
     computed: {
       //

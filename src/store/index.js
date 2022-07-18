@@ -8,6 +8,7 @@ export default new Vuex.Store({
     loggedIn: 0,
     token: '',
     overlay: false,
+    titleForm: '',
     json_Snackbar: {
       snackbar: false,
       y: 'top',
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     setLoggedIn (state, payload) {
       state.loggedIn = payload
     },
+    setTitleForm (state, payload) {
+      state.titleForm = payload
+    },
     setToken (state, payload) {
       state.token = payload
     },
@@ -63,6 +67,9 @@ export default new Vuex.Store({
     loadLoggedIn ({commit}, payload) {
       commit('setLoggedIn', payload)
     },
+    loadTitleForm ({commit}, payload) {
+      commit('setTitleForm', payload)
+    },
     loadToken ({commit}, payload) {
       commit('setToken', payload)
     },
@@ -84,6 +91,9 @@ export default new Vuex.Store({
   getters: {
     getLoggedIn (state) {
       return state.loggedIn
+    },
+    getTitleForm (state) {
+      return state.titleForm
     },
     getToken (state) {
       return state.token

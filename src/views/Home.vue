@@ -10,10 +10,17 @@
       </v-img>
     </v-flex>
     <v-row class="text-center">
+
       <v-col class="mb-4" cols="12">
         <h1 class="display-2 font-weight-bold mb-3 font-italic">
           Bienvenido
         </h1>
+
+        <p class="subheading font-weight-regular">
+          Gracias por tu visita,
+          <br>click en el boton para ingresar
+          <br>
+        </p>
       </v-col>
     </v-row>
     <!-- img alt="Vue logo" src="../assets/logo.png" -->
