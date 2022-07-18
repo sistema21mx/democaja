@@ -1,6 +1,5 @@
 <template>
   <v-container>
-  
     <v-card>
       <v-card-title class="py-2 my-2">
         <span :class="classform">{{titleForm}}</span>

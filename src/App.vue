@@ -34,7 +34,15 @@
         >
         <span>Ingresar</span>
       </v-btn>
-
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn fab x-small v-on="on" :color="buttoncolor" 
+              class="px-1 mx-1" v-show="titleForm !== ''" to="/logged">
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
+          </template>
+          <span>Cerrar</span>
+        </v-tooltip>
     </v-app-bar>
 
     <v-navigation-drawer
