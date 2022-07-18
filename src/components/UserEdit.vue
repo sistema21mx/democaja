@@ -129,9 +129,17 @@
         if(await this.validationFields()){
           await this.getOverlay(2000);
           let apiRoute = this.formData.id === 0? 'usercreate' : 'userupdate';
+
+          /*
           this.formData.name = (await this.formData.firstname + ' ' + 
             await this.formData.midname + ' ' + 
             await this.formData.lastname).trim();
+          */
+          this.formData.name = (await this.formData.firstname + ' ' + 
+            await this.formData.midname).trim();
+          if(this.formData.lastname !== '' || this.formData.lastname !== null){
+            this.formData.name = (await this.formData.name + ' ' + await this.formData.lastname).trim();
+          }
           if(await this.formData.password.length === 0 &&
            await this.formData.id === 0){
            this.formData.password = await this.makeString(6);
