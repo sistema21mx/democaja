@@ -88,7 +88,7 @@
         if(await this.validationFields()){
           await this.getOverlay(2000);
           
-          let apiRoute = this.formData.id === 0? 'itemcreate' : 'itemupdate';
+          let apiRoute = this.formData.id === 0? 'customercreate' : 'customerupdate';
           let formData = await this.formData;
           formData.employee_id = await this.userData.id;
           let token = await this.token;
