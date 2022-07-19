@@ -52,9 +52,31 @@
                   v-model="formData.name" label="Nombre*" v-on:keyup="keymonitor"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4" class="py-1 my-1">
-                <v-text-field id="text_price" ref="text_" :disabled="!isEditing" dense class="py-0 my-0"
-                  v-model="formData.price" label="Precio" v-on:keyup="keymonitor"></v-text-field>
+                <vuetify-money
+                  v-model="formData.price"
+                  v-bind:label="'Precio*'"
+                  v-bind:placeholder="','"
+                  v-bind:readonly="false"
+                  v-bind:disabled="!isEditing"
+                  v-bind:outlined="false"
+                  v-bind:clearable="false"
+                  v-bind:valueWhenIsEmpty="'0'"
+                  v-bind:options='{
+                    locale: "en-US",
+                    prefix: "",
+                    suffix: "",
+                    length: 11,
+                    precision: 2
+                  }'
+                  id="text_price"
+                  ref="text_price"
+                  class="py-0 my-0"
+                  dense
+                  @savEdit="savEdit"
+                />
               </v-col>
+
+
             </v-row>
           </v-form>
         </v-container>

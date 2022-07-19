@@ -11,6 +11,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import "./plugins/vuetify-mask.js";
+import "./plugins/vuetify-money.js"
 
 import mixins from './mixins/mixins'
 Vue.mixin(mixins)

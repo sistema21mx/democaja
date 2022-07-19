@@ -1,0 +1,72 @@
+{
+  "_from": "vuetify-money",
+  "_id": "vuetify-money@1.2.0",
+  "_inBundle": false,
+  "_integrity": "sha512-YVxO2bNE9HIgRZmF/d3ol4DJrJrbnptzrd72D5KpUxaSyjx0+8bTxUStGRYIHPoFsnUH/uCJOuZkGSVhbdqf3A==",
+  "_location": "/vuetify-money",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "vuetify-money",
+    "name": "vuetify-money",
+    "escapedName": "vuetify-money",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vuetify-money/-/vuetify-money-1.2.0.tgz",
+  "_shasum": "8a3e0367e0aa6a2223276fe1f24f06a052a76b9a",
+  "_spec": "vuetify-money",
+  "_where": "C:\\xampp\\htdocs\\demo",
+  "author": {
+    "name": "Juarez Nasato",
+    "email": "juareznasato@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/juareznasato/vuetify-money/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Money component for vuetify 2.x.",
+  "devDependencies": {
+    "@mdi/font": "^5.0.45",
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "@vue/eslint-config-prettier": "^5.0.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^5.16.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "prettier": "^1.19.1",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "homepage": "https://github.com/juareznasato/vuetify-money#readme",
+  "keywords": [
+    "vuejs",
+    "vuetify",
+    "v-text-field",
+    "money",
+    "currency",
+    "decimal"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "vuetify-money",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juareznasato/vuetify-money.git"
+  },
+  "scripts": {
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "serve": "vue-cli-service serve"
+  },
+  "version": "1.2.0"
+}
