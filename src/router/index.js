@@ -8,6 +8,7 @@ import Logged from '../views/Logged.vue'
 import Logout from '../views/Logout.vue'
 import Test from '../views/Test.vue'
 import User from '../views/User.vue'
+import Customer from '../views/Customer.vue'
 import Item from '../views/Item.vue'
 import Profile from '../views/Profile.vue'
 import NotFound from '../views/NotFound.vue'
@@ -51,6 +52,12 @@ const routes = [
     path: '/user',
     name: 'User',
     component: User,
+    meta: { requiresAuth: true}
+  },
+  {
+    path: '/customer',
+    name: 'Customer',
+    component: Customer,
     meta: { requiresAuth: true}
   },
   {

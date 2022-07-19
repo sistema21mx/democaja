@@ -118,7 +118,7 @@
 </template>
 <script>
   export default {
-    name: 'ItemList',
+    name: 'CustomerList',
     props: {
       //
     },
@@ -134,12 +134,6 @@
             value: 'name',
         },
         {
-            text: 'Precio',
-            align: 'right',
-            sortable: true,
-            value: 'priceCurrency',
-        },      
-        {
             text: 'Activo',
             align: 'left',
             sortable: true,
@@ -151,7 +145,6 @@
         id: '',
         code: '',
         name: '',
-        priceCurrency: '',
         active: '1',
       }],
       search: '',
@@ -176,8 +169,8 @@
       initialize: function () {
         //
       },
-      async itemList () {
-        let apiRoute = await 'itemall';
+      async customerList () {
+        let apiRoute = await 'customerall';
         let formData = await {};
         let token = await this.token;
         let responseData = await this.getApi(apiRoute, formData, token);
@@ -191,7 +184,7 @@
       //
     },
     mounted () {
-      this.itemList()
+      this.customerList()
     },
     updated () {
       //
