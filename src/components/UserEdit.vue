@@ -92,7 +92,6 @@
       FORMDATA {{formData}} <BR/>
     </DIV>
   </v-container>
-  
 </template>
 <script>
   export default {
@@ -104,7 +103,6 @@
       //
     },
     data: () => ({
-      //
       isEditing: false,
       formData: {},
       formDataDefault: {

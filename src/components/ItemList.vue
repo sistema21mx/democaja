@@ -152,7 +152,7 @@
         id: '',
         code: '',
         name: '',
-        priceCurrency: '0',
+        priceCurrency: '',
         active: '1',
       }],
       search: '',
